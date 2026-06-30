@@ -1,27 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --background: 24 15% 98%; /* #FAFAF9 - off-white */
+  --foreground: 224 71.4% 4.1%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 224 71.4% 4.1%;
+ 
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 71.4% 4.1%;
+ 
+  --primary: 172 78% 25%; /* #0F766E - deep teal */
+  --primary-foreground: 210 20% 98%;
+ 
+  --secondary: 172 40% 96%;
+  --secondary-foreground: 172 78% 25%;
+ 
+  --muted: 220 14.3% 95.9%;
+  --muted-foreground: 220 8.9% 46.1%;
+ 
+  --accent: 343 95% 71%; /* #FB7185 - warm coral */
+  --accent-foreground: 343 95% 20%;
+ 
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 20% 98%;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 172 78% 25%;
+ 
+  --radius: 1rem; /* 16px */
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAFAF9;
+  color: #1E293B; /* slate-800 */
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Custom Glassmorphism & Premium Cards */
+.premium-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(15, 118, 110, 0.04), 0 2px 8px -1px rgba(15, 118, 110, 0.02);
+  border-radius: 1rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(15, 118, 110, 0.08), 0 4px 12px -2px rgba(15, 118, 110, 0.04);
+  border-color: rgba(15, 118, 110, 0.15);
+}
+
+/* Custom Booking Slot Picker Grid */
+.slot-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.slot-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.slot-grid::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 10px;
+}
+
+.slot-grid::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
+
+/* Pulse animation for urgency text */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Confetti canvas */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Accessibility: High-contrast focus outline for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #0F766E !important;
+  outline-offset: 2px !important;
+}
+
+/* WCAG AA Contrast-Compliant Coral Utilities */
+.text-coral {
+  color: #E11D48 !important; /* Rose-600 for high-contrast text (4.5:1 minimum) */
+}
+
+.bg-coral {
+  background-color: #FB7185 !important; /* Lighter coral for decorative backgrounds/badges */
+}
+
+.border-coral {
+  border-color: #FB7185 !important;
 }
