@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS patients (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
     age INTEGER NOT NULL,
-    phone VARCHAR(50) NOT NULL,
+    phone VARCHAR(50) UNIQUE NOT NULL,
     blood_group VARCHAR(10),
     conditions TEXT,
     medications TEXT
