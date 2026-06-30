@@ -4,6 +4,8 @@ import { auth } from "@/lib/auth";
 import { pool } from "@/lib/db";
 import { sendWhatsAppText } from "@/lib/whatsapp";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
     const session = await auth.api.getSession({

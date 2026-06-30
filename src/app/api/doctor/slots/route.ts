@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { pool } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 // GET: Fetch slots for the logged-in doctor on a specific date
 export async function GET(request: Request) {
   try {
