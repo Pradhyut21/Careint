@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
-import { Menu, X, LogOut, LayoutDashboard, User } from "lucide-react";
+import { Menu, X, LogOut, LayoutDashboard, User, MessageSquare } from "lucide-react";
 
 export default function Header() {
   const { data: session, isPending } = authClient.useSession();
@@ -51,6 +51,14 @@ export default function Header() {
             className="text-sm font-medium text-slate-600 transition-colors hover:text-teal-600"
           >
             Find a Doctor
+          </Link>
+          <span className="h-4 w-px bg-slate-200" />
+          <Link
+            href="/whatsapp-simulator"
+            className="text-sm font-medium text-slate-600 transition-colors hover:text-teal-600 flex items-center gap-1.5"
+          >
+            <MessageSquare className="h-4.5 w-4.5 text-emerald-600" />
+            WhatsApp AI
           </Link>
           <span className="h-4 w-px bg-slate-200" />
           
@@ -104,6 +112,17 @@ export default function Header() {
               className="text-base font-medium text-slate-700 hover:text-teal-600"
             >
               Find a Doctor
+            </Link>
+            
+            <span className="h-px bg-slate-150 w-full block" />
+            
+            <Link
+              href="/whatsapp-simulator"
+              onClick={() => setIsOpen(false)}
+              className="text-base font-medium text-slate-700 hover:text-teal-600 flex items-center gap-2"
+            >
+              <MessageSquare className="h-5 w-5 text-emerald-600" />
+              WhatsApp AI Assistant
             </Link>
             
             <div className="h-px bg-slate-100" />
