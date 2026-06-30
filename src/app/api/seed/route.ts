@@ -88,9 +88,9 @@ export async function GET(request: Request) {
   const secret = searchParams.get("secret");
   const SEED_SECRET = process.env.SEED_SECRET;
 
-  if (process.env.NODE_ENV !== "development" || !SEED_SECRET || secret !== SEED_SECRET) {
+  if (!SEED_SECRET || secret !== SEED_SECRET) {
     return NextResponse.json(
-      { error: "Forbidden. Seeding is only allowed in development mode with the correct SEED_SECRET." },
+      { error: "Forbidden. Seeding is only allowed with the correct SEED_SECRET." },
       { status: 403 }
     );
   }
