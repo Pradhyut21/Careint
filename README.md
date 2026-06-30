@@ -148,8 +148,36 @@ Make sure your Next.js server is running! (npm run dev)
 
 ---
 
-## WhatsApp Booking Webhook
-The conversational booking assistant is located at `/api/whatsapp/webhook`.
-- **Symptom Triage**: When a patient describes symptoms in plain text, Gemini 1.5 Flash maps them to a specialization (e.g., "My chest feels tight" -> Cardiology) and extracts patient name and age.
-- **Interactive Flow**: Uses Meta's quick-reply buttons and list messages in **English, Hindi, or Kannada** to guide patients through selecting a doctor, date, and slot.
-- **Local Testing**: If `WHATSAPP_TOKEN` is not set, the webhook will print all outgoing WhatsApp payloads directly to the server console in a beautiful formatted box for review.
+## WhatsApp AI Bot & Web Simulator
+
+We have built a fully conversational AI WhatsApp Bot powered by the **Gemini 1.5 Flash API** to handle both patient booking and clinic staff operations. To make testing these flows instant and zero-config, we built a **WhatsApp Web Simulator** directly inside the application.
+
+### Accessing the Web Simulator:
+Start your development server (`npm run dev`) and navigate to:
+👉 **`http://localhost:3000/whatsapp-simulator`**
+
+---
+
+### 1. Patient Triage & Booking Flow
+*   **AI Triage**: Patients can describe their symptoms in plain text (e.g., *"My 5-year-old child has a high fever"*). Gemini automatically extracts the patient's name, age, and maps the symptoms to the correct medical specialization (e.g., *Pediatrics*).
+*   **Interactive Menus**: The bot responds using WhatsApp Quick-Reply buttons and List menus, allowing the patient to select a doctor, choose a date/time slot, and confirm their booking.
+*   **Multi-lingual Support**: Fully localized in **English**, **Hindi (हिंदी)**, and **Kannada (ಕನ್ನಡ)**.
+
+---
+
+### 2. Clinic Staff Inventory Flow
+The bot automatically detects if the sender's phone number belongs to a clinic staff member (e.g., *Nurse Emily*, seeded with phone `919876543210`).
+*   **Natural Language Logging**: The nurse can text updates like:
+    *   `"used 5 paracetamol"`
+    *   `"added 15 syringes"`
+    *   `"covid vaccine 1 bottle used"`
+*   **Automatic Stock Updates**: Gemini parses the item and the quantity change (negative for usage, positive for restocking) and updates the PostgreSQL `inventory` table in real-time.
+*   **Low-Stock Alerts**: If an item's stock falls below its safety threshold (e.g., syringes drop below 15), the system automatically broadcasts a **Low Stock Alert** via WhatsApp to all registered doctors in the clinic.
+
+---
+
+### 3. Local Webhook Testing (For Meta Cloud API)
+The webhook is located at `/api/whatsapp/webhook`. 
+*   If you wish to link it to a real WhatsApp Business phone number, set up a Meta Developer App, configure your webhook URL using a tool like `ngrok` to tunnel `http://localhost:3000/api/whatsapp/webhook`, and set the `WHATSAPP_TOKEN` and `WHATSAPP_PHONE_ID` in your environment variables.
+*   If no credentials are set, the webhook safely runs in **Simulation Mode**, logging all outgoing payloads to the server terminal and returning them directly to the Web Simulator for rendering.
+
