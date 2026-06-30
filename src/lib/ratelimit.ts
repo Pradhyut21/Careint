@@ -36,8 +36,8 @@ if (redisUrl && redisToken) {
   // Defer the production check to request-time so it doesn't crash the build phase
   const handleLimit = async () => {
     if (process.env.NODE_ENV === "production") {
-      throw new Error(
-        "CRITICAL SECURITY ERROR: Upstash Redis environment variables (UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN) are missing in production! Rate limiting must be configured."
+      console.warn(
+        "WARNING: Upstash Redis environment variables (UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN) are missing in production. Rate limiting is currently bypassed."
       );
     }
     return {
