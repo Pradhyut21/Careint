@@ -303,7 +303,7 @@ export async function GET(request: Request) {
     console.log("Seeding staff...");
     await client.query(
       `INSERT INTO staff (name, phone, role) VALUES 
-       ('Nurse Mary', '+919876543220', 'nurse'),
+       ('Nurse Emily', '+919876543210', 'nurse'),
        ('Dr. Sarah Jenkins', '+919900990099', 'doctor'),
        ('Dr. Rajesh Kumar', '+918822334455', 'doctor')
        ON CONFLICT (phone) DO NOTHING`
